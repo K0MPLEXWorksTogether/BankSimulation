@@ -28,6 +28,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.passwordHash = passwordHash;
+        this.createdAt = LocalDateTime.now();
         this.accounts = accounts;
     }
 
