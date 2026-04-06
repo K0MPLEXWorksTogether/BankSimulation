@@ -11,25 +11,25 @@ import tech.abhirammangipudi.models.Transaction.TransactionAgent;
 import tech.abhirammangipudi.models.Transaction.TransactionType;
 
 public class SavingsAccount extends Account implements Withdraw {
-    private final double intrestRate;
+    private final double interestRate;
 
     public SavingsAccount(String accountNumber, User accountHolder, double balance, LocalDateTime dateOpened,
-            double minimumBalance, double intrestRate) {
+            double minimumBalance, double interestRate) {
         super(accountHolder, balance, dateOpened, minimumBalance);
-        this.intrestRate = intrestRate;
+        this.interestRate = interestRate;
     }
 
     public SavingsAccount(String accountNumber, User accountHolder, double balance, double minimumBalance,
-            double intrestRate) {
+            double interestRate) {
         super(accountHolder, balance, minimumBalance);
-        this.intrestRate = intrestRate;
+        this.interestRate = interestRate;
     }
 
-    public double getIntrestRate() {
-        return intrestRate;
+    public double getinterestRate() {
+        return interestRate;
     }
 
-    public void calculateIntrest() throws InvalidAmountException {
+    public void calculateinterest() throws InvalidAmountException {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime lastInterestDate = getDateOpened();
 
@@ -42,7 +42,7 @@ public class SavingsAccount extends Account implements Withdraw {
         }
 
         if (lastInterestDate.plusYears(1).isBefore(now) || lastInterestDate.plusYears(1).isEqual(now)) {
-            double interest = getBalance() * (intrestRate / 100);
+            double interest = getBalance() * (interestRate / 100);
             this.deposit(interest);
         }
     }
@@ -66,7 +66,8 @@ public class SavingsAccount extends Account implements Withdraw {
 
         setBalance(getBalance() - amount);
         Transaction transaction = new Transaction(UUID.randomUUID(), TransactionType.WITHDRAWAL, amount,
-                LocalDateTime.now(), getBalance(), TransactionAgent.USER);
+                LocalDateTime.now(), getBalance(), TransactionAgent.USER, getAccountHolder().getUserId(),
+                getAccountNumber());
         addTransaction(transaction);
     }
 }
