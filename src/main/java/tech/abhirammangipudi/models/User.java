@@ -2,20 +2,24 @@ package tech.abhirammangipudi.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
+    private final UUID userId;
     private String firstName;
     private String lastName;
-    private LocalDateTime dateOfBirth;
-    private String email;
+    private final LocalDateTime dateOfBirth;
+    private final String email;
     private String address;
     private String phoneNumber;
-    private String username;
-    private String password;
+    private final String username;
+    private String passwordHash;
+    private LocalDateTime createdAt;
     private List<Account> accounts;
-    
+
     public User(String firstName, String lastName, LocalDateTime dateOfBirth, String email, String address,
-            String phoneNumber, String username, String password, List<Account> accounts) {
+            String phoneNumber, String username, String passwordHash, List<Account> accounts) {
+        this.userId = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -23,7 +27,7 @@ public class User {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.accounts = accounts;
     }
 
@@ -55,8 +59,16 @@ public class User {
         return username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public List<Account> getAccounts() {
@@ -71,28 +83,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setAddress(String address) {
         this.address = address;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setAccounts(List<Account> accounts) {
