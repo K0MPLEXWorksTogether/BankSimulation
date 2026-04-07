@@ -11,7 +11,7 @@ import tech.abhirammangipudi.models.Transaction.TransactionAgent;
 import tech.abhirammangipudi.models.Transaction.TransactionType;
 import tech.abhirammangipudi.interfaces.CheckBalance;
 
-public abstract class Account implements Deposit, CheckBalance{
+public abstract class Account implements Deposit, CheckBalance {
     private final UUID accountNumber;
     private final User accountHolder;
     private final LocalDateTime dateOpened;
@@ -19,6 +19,16 @@ public abstract class Account implements Deposit, CheckBalance{
     private double balance;
     private double minimumBalance;
     private List<Transaction> transactions;
+
+    public Account(UUID accountNumber, User accountHolder, LocalDateTime dateOpened, double balance,
+            double minimumBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+        this.dateOpened = dateOpened;
+        this.minimumBalance = minimumBalance;
+        this.transactions = new ArrayList<>();
+    }
 
     public Account(User accountHolder, double balance, LocalDateTime dateOpened,
             double minimumBalance) {
@@ -91,7 +101,8 @@ public abstract class Account implements Deposit, CheckBalance{
 
         this.balance += amount;
         Transaction transaction = new Transaction(UUID.randomUUID(), TransactionType.DEPOSIT, amount,
-                LocalDateTime.now(), this.balance, TransactionAgent.USER);
+                LocalDateTime.now(), this.balance, TransactionAgent.USER, this.accountHolder.getUserId(),
+                this.accountNumber);
         this.transactions.add(transaction);
     }
 

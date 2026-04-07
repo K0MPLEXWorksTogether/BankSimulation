@@ -21,15 +21,19 @@ public class Transaction {
     private final LocalDateTime timestamp;
     private final double balanceAfter;
     private final TransactionAgent transactionAgent;
+    private final UUID userId;
+    private final UUID accountId;
 
     public Transaction(UUID transactionId, TransactionType type, double amount, LocalDateTime timestamp,
-            double balanceAfter, TransactionAgent transactionAgent) {
+            double balanceAfter, TransactionAgent transactionAgent, UUID userId, UUID accountId) {
         this.transactionId = transactionId;
         this.type = type;
         this.amount = amount;
         this.timestamp = timestamp;
         this.balanceAfter = balanceAfter;
         this.transactionAgent = transactionAgent;
+        this.userId = userId;
+        this.accountId = accountId;
     }
 
     public UUID getTransactionId() {
@@ -54,5 +58,13 @@ public class Transaction {
 
     public TransactionAgent getTransactionAgent() {
         return transactionAgent;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public UUID getAccountId() {
+        return accountId;
     }
 }

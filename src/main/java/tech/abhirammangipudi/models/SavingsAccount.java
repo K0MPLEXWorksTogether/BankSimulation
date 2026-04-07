@@ -13,13 +13,19 @@ import tech.abhirammangipudi.models.Transaction.TransactionType;
 public class SavingsAccount extends Account implements Withdraw {
     private final double interestRate;
 
-    public SavingsAccount(String accountNumber, User accountHolder, double balance, LocalDateTime dateOpened,
+    public SavingsAccount(UUID accountNumber, User accountHolder, double balance, LocalDateTime dateOpened,
+            double minimumBalance, double interestRate) {
+        super(accountNumber, accountHolder, dateOpened, balance, minimumBalance);
+        this.interestRate = interestRate;
+    }
+
+    public SavingsAccount(User accountHolder, double balance, LocalDateTime dateOpened,
             double minimumBalance, double interestRate) {
         super(accountHolder, balance, dateOpened, minimumBalance);
         this.interestRate = interestRate;
     }
 
-    public SavingsAccount(String accountNumber, User accountHolder, double balance, double minimumBalance,
+    public SavingsAccount(User accountHolder, double balance, double minimumBalance,
             double interestRate) {
         super(accountHolder, balance, minimumBalance);
         this.interestRate = interestRate;
