@@ -7,7 +7,6 @@ public class Transaction {
     public enum TransactionType {
         DEPOSIT,
         WITHDRAWAL,
-        TRANSFER
     }
 
     public enum TransactionAgent {
