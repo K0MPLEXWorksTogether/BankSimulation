@@ -17,16 +17,15 @@ public class ConnectionSingleton {
     private ConnectionSingleton() {
     }
 
-    public static synchronized Connection getConnection() throws ConnectionError{
+    public static synchronized Connection getConnection() throws ConnectionError {
         try {
             if (HOST == null || DATABASE == null || USER == null || PASSWORD == null) {
                 throw new ConnectionError("MySQL information not set in the environment", HOST);
             }
-            
+
             String url = String.format(
-                        "jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC",
-                        HOST, PORT, DATABASE
-                );
+                    "jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC",
+                    HOST, PORT, DATABASE);
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(url, USER, PASSWORD);
             }
